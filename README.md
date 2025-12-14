@@ -1,86 +1,129 @@
-# Automation-Anywhere1A
+# Automation-Anywhere1A: Computer Vision for Check Understanding & Signature Verification
 
-## Overview
-This repository contains the implementation for **Automation-Anywhere1A**, a project focused on automating document understanding and information extraction tasks. It was developed as part of the Break Through Tech AI Fellowship in collaboration with Automation Anywhere, using AI/ML techniques for intelligent document processing.
+## Team Members
 
-The project includes data preprocessing pipelines, model training scripts, and evaluation notebooks built primarily in Python.
+| Name | GitHub Handle | Contribution |
+|------|---------------|--------------|
+| Evelyn | @e2sun | Project management, data preparation, coordination |
+| Anmol | — | Data preparation, dataset cleaning and validation |
+| Angelina | @angelinadegay | Data processing, annotation conversion, dataset restructuring |
+| Julia | — | Model training, evaluation, performance analysis |
+| Mahi | — | Model training, evaluation, performance analysis |
 
----
+## Project Highlights
 
-## Features
-- Automated document analysis and text extraction pipeline
-- Machine learning models for entity recognition and classification
-- Integration-ready Python modules and Jupyter notebooks
-- Modular and extendable architecture
-- Open dataset support (`ssbi-dataset`)
+- Developed an end-to-end computer vision pipeline for automated bank check understanding using YOLO-based object detection models.
+- Automated detection of key check fields (date, payee, legal amount, courtesy amount) and signature regions.
+- Enabled signature verification by distinguishing genuine vs. forged signatures as separate object classes.
+- Built scalable data preprocessing and annotation conversion pipelines to prepare the SSBI dataset for training.
+- Demonstrated how intelligent document processing can reduce manual check-processing costs and errors for enterprise automation workflows at Automation Anywhere.
 
----
+## Setup and Installation
 
-## Repository Structure
-Automation-Anywhere1A/
-├── notebooks/ # Interactive Jupyter notebooks for experimentation
-├── scripts/ # Core Python scripts for automation workflows
-├── ssbi-dataset/ # Dataset used for training and evaluation
-├── .gitmodules # Git submodules for external dependencies
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+### 1. Clone the repository
 
-
----
-
-## Getting Started
-
-### Prerequisites
-- Python 3.8 or higher  
-- pip (Python package manager)  
-- Jupyter Notebook or JupyterLab  
-
-### Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/angelinadegay/Automation-Anywhere1A.git
-   cd Automation-Anywhere1A
-
-   cd Automation-Anywhere1A
-(Optional) Create and activate a virtual environment:
-
-
+```bash
+git clone https://github.com/angelinadegay/Automation-Anywhere1A.git
+cd Automation-Anywhere1A
 ```
+
+### 2. (Optional) Create a virtual environment
+
+```bash
 python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
+source venv/bin/activate      # Windows: venv\Scripts\activate
 ```
-Install dependencies:
-```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-```
+### 4. Launch notebooks
+
+```bash
 jupyter notebook
 ```
-Open and run any notebook in the notebooks/ directory to test document automation pipelines.
 
-Use scripts from the scripts/ folder for standalone or batch processing tasks.
+Open any notebook under the `notebooks/` directory to begin data processing, training, or evaluation.
 
-Configure dataset paths and parameters as needed within each notebook or script.
+## Project Overview
 
-Contributing
-Contributions are welcome. To propose changes:
+This project was developed as part of the **Break Through Tech AI Fellowship – AI Studio**, in collaboration with **Automation Anywhere**.
 
-Fork the repository.
+The objective of this challenge was to explore how computer vision and machine learning can be applied to intelligent document processing, specifically for bank checks, which are visually complex and error-prone when processed manually.
 
-Create a feature branch:
+In real-world enterprise settings, manual check processing is expensive, time-consuming, and susceptible to human error. This project demonstrates how automated detection and verification of check fields and signatures can improve accuracy, scalability, and security in financial document workflows.
 
-```
-git checkout -b feature/your-feature-name
-```
-Commit and push your changes:
+## Data Exploration
 
-```
-git commit -m "Add feature: your-feature-name"
-git push origin feature/your-feature-name
-```
-Open a Pull Request describing your changes.
+### Dataset Used
 
-License
-Specify your license here (e.g., MIT License).
-If you haven’t added one yet, create a file named LICENSE at the project root.
+**SSBI (Synthetic Signature Bankcheck Images) Dataset**
+
+- 4,360 annotated bank check images
+- COCO-style annotations
+- Includes genuine signatures, forged signatures, and bounding boxes for all key check fields
+
+**Source:**
+Enhanced Bank Check Security: Introducing a Novel Dataset and Transformer-Based Approach for Detection and Verification  
+Document Analysis Systems (DAS) Workshop @ ICDAR 2024  
+https://doi.org/10.1007/978-3-031-70442-0_3
+
+### Data Processing & EDA
+
+- Removed corrupted and duplicate images
+- Validated annotation consistency
+- Converted COCO annotations to YOLO format
+- Filtered outliers and restructured the dataset for training
+- Re-split data into train, validation, and test sets
+
+### Challenges & Assumptions
+
+- High variability in handwriting and signatures
+- Cluttered document layouts
+- Synthetic data required careful validation to ensure realism
+
+## Model Development
+
+**Model Type:** YOLO object detection models (YOLO11 n/s/m variants)
+
+**Task:** Multi-class object detection for check fields and signature types
+
+**Training Setup:**
+- GPU-accelerated training (CUDA recommended)
+- Image size: 640×640
+
+**Approach:**
+- Detection-based formulation of signature verification
+- Modular and extendable training pipeline
+
+## Results & Key Findings
+
+- Successfully detected all major check components with strong localization performance
+- Clear separation between genuine and forged signatures at the detection level
+- Automated preprocessing significantly reduced manual data preparation effort
+- Results demonstrate the feasibility of computer vision–based financial document intelligence
+
+## Next Steps
+
+- Extend the pipeline to real-world scanned checks
+- Integrate transformer-based signature verification models
+- Perform deeper fairness and bias analysis across handwriting styles
+- Integrate OCR for text extraction
+- Optimize models for production deployment and latency constraints
+
+## License
+
+This project is licensed under the CC BY-NC 4.0 License unless otherwise specified.  
+See the LICENSE file for full details.
+
+## References
+
+- Khan et al., Enhanced Bank Check Security: Introducing a Novel Dataset and Transformer-Based Approach for Detection and Verification, ICDAR 2024.
+- Ultralytics YOLO Documentation
+
+## Acknowledgements
+
+We thank Break Through Tech AI for the AI Studio Fellowship, Automation Anywhere for the industry problem context, and our Challenge Advisor and TAs for their guidance and support throughout the project.
