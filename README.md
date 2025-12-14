@@ -206,8 +206,7 @@ Model performance was evaluated using standard object detection metrics on a hel
 
 ## License
 
-This project is licensed under the **CC BY-NC 4.0 License** unless otherwise specified.  
-See the [LICENSE](LICENSE) file for full details.
+This project is licensed under the **CC BY-NC 4.0 License**
 
 ## References
 
